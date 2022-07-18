@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Full Screen Image Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="slider">
+        <div class="slide current">
+            <div class="content">
+                <h1>Slide One</h1>
+                <p>
+                    Animi in quas nihil ipsam quasi laboriosam dolore ut, 
+                    nostrum ipsum dignissimos repellendus quaerat maxime eos ad, 
+                    dolor eum. Nesciunt, mollitia excepturi?
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <h1>Slide Two</h1>
+                <p>
+                    Architecto, quisquam sint neque expedita inventore rerum aperiam totam omnis voluptates rem, 
+                    ab dolore laboriosam veniam repudiandae ipsa asperiores harum, 
+                    illo eveniet!
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <h1>Slide Three</h1>
+                <p>
+                    Sapiente harum in quibusdam similique veritatis rem magni, 
+                    voluptatum eaque sint repellendus labore omnis officiis obcaecati eum reiciendis sequi quidem! 
+                    Facere, voluptatum!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <button id="prev"><i class="fas fa-arrow-left"></i></button>
+    <button id="next"><i class="fas fa-arrow-right"></i></button>
+
+    <!-- <script src="js/main.js"></script> -->
+    <script>
+        const slides = document.querySelectorAll('.slide')
+        const next = document.querySelector('#next')
+        const prev = document.querySelector('#prev')
+
+        const nextSlide = () => {
+            const current = document.querySelector('.slide.current')
+            current.classList.remove('current')
+            if (current.nextElementSibling) {
+                current.nextElementSibling.classList.add('current')
+            } else {
+                slides[0].classList.add('current')
+            }
+        }
+        const prevSlide = () => {
+            const current = document.querySelector('.slide.current')
+            current.classList.remove('current')
+            if (current.previousElementSibling) {
+                current.previousElementSibling.classList.add('current')
+            } else {
+                slides[slides.length-1].classList.add('current')
+            }
+        }
+
+        // const auto = false
+        const auto = true
+        const intervalTime = 5000
+        let slideInterval
+        if (auto) {
+            slideInterval = setInterval(nextSlide, intervalTime)
+        }
+
+        next.addEventListener('click', () => {
+            nextSlide()
+            if (auto) {
+                clearInterval(slideInterval)
+                slideInterval = setInterval(nextSlide, intervalTime)
+            }
+        })
+        prev.addEventListener('click', () => {
+            prevSlide()
+            if (auto) {
+                clearInterval(slideInterval)
+                slideInterval = setInterval(nextSlide, intervalTime)
+            }
+        })
+    </script>
+</body>
+</html>
